@@ -1,6 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 
 import deepCopy from "../index";
+import typeOf from "../type-of";
 
 describe("Map, Set의 깊은 복사 테스트", () => {
   test("Map에 객체가 존재할 때", () => {
@@ -23,10 +24,17 @@ describe("Map, Set의 깊은 복사 테스트", () => {
      * @Then
      */
     const testCases = [
+      typeOf.isMap(copiedMap),
+
       originalMap.get("a") === copiedMap.get("a"),
-      originalMap.get("b") !== copiedMap.get("b"),
-      originalMap.get("c").d !== copiedMap.get("c").d,
+
+      typeOf.isObject(copiedMap.get("b")) &&
+        originalMap.get("b") !== copiedMap.get("b"),
+
+      typeOf.isObject(copiedMap.get("c").d) &&
+        originalMap.get("c").d !== copiedMap.get("c").d,
     ];
+
     expect(testCases).toEqual(
       Array.from({ length: testCases.length }, () => true),
     );
@@ -52,10 +60,17 @@ describe("Map, Set의 깊은 복사 테스트", () => {
      * @Then
      */
     const testCases = [
+      typeOf.isMap(copiedMap),
+
       originalMap.get("a") === copiedMap.get("a"),
-      originalMap.get("b") !== copiedMap.get("b"),
-      originalMap.get("c")[0] !== copiedMap.get("c")[0],
+
+      typeOf.isArray(copiedMap.get("b")) &&
+        originalMap.get("b") !== copiedMap.get("b"),
+
+      typeOf.isArray(copiedMap.get("c")[0]) &&
+        originalMap.get("c")[0] !== copiedMap.get("c")[0],
     ];
+
     expect(testCases).toEqual(
       Array.from({ length: testCases.length }, () => true),
     );
@@ -80,9 +95,14 @@ describe("Map, Set의 깊은 복사 테스트", () => {
      * @Then
      */
     const testCases = [
+      typeOf.isMap(copiedMap),
+
       originalMap.get("a") === copiedMap.get("a"),
-      originalMap.get("b") !== copiedMap.get("b"),
+
+      typeOf.isSet(copiedMap.get("b")) &&
+        originalMap.get("b") !== copiedMap.get("b"),
     ];
+
     expect(testCases).toEqual(
       Array.from({ length: testCases.length }, () => true),
     );

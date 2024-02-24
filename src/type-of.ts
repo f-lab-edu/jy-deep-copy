@@ -5,7 +5,9 @@ const typeOf = {
     return (
       !!value &&
       typeof value === "object" &&
-      Object.prototype.toString.call(value).match(typeRegex)?.[0] === "Object"
+      Object.prototype.toString.call(value).match(typeRegex)?.[0] ===
+        "Object" &&
+      Object.getPrototypeOf(value).constructor === Object
     );
   },
   isArray(value: unknown): value is Array<unknown> {

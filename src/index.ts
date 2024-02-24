@@ -1,1 +1,3 @@
-console.log("Hello world");
+export default function deepCopy<T>(value: T) {
+  return value;
+}
